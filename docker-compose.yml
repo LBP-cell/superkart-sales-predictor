@@ -1,0 +1,35 @@
+services:
+  # 1. The Machine Learning Inference Engine (Flask)
+  backend:
+    build:
+      context: ./backend_files
+      dockerfile: Dockerfile
+    container_name: superkart-backend
+    ports:
+      - "7860:7860"
+    volumes:
+      - ./backend_files:/app
+    networks:
+      - superkart-network
+    restart: always
+
+  # 2. The User Interface Application (Streamlit)
+  frontend:
+    build:
+      context: ./frontend_files
+      dockerfile: Dockerfile
+    container_name: superkart-frontend
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./frontend_files:/app
+    networks:
+      - superkart-network
+    depends_on:
+      - backend
+    restart: always
+
+# Define the isolated private internal network bridge
+networks:
+  superkart-network:
+    driver: bridge
