@@ -1,0 +1,13 @@
+# Ignore python cache files
+__pycache__/
+*.pyc
+
+# Ignore localized environment settings
+.env
+.venv
+env/
+venv/
+.pytest_cache/
+
+# Ignore Jupyter Notebook checkouts
+.ipynb_checkpoints/
